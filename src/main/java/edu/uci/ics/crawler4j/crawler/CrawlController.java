@@ -391,7 +391,11 @@ public class CrawlController extends Configurable {
      *            the URL of the seed
      */
     public void addSeed(String pageUrl) {
-        addSeed(pageUrl, -1);
+        addSeed(pageUrl, null, -1);
+    }
+
+    public void addSeed(String pageUrl, String label) {
+        addSeed(pageUrl, label, -1);
     }
 
     /**
@@ -413,7 +417,7 @@ public class CrawlController extends Configurable {
      *            the document id that you want to be assigned to this seed URL.
      *
      */
-    public void addSeed(String pageUrl, int docId) {
+    public void addSeed(String pageUrl, String label, int docId) {
         String canonicalUrl = URLCanonicalizer.getCanonicalURL(pageUrl);
         if (canonicalUrl == null) {
             logger.error("Invalid seed URL: {}", pageUrl);
@@ -437,6 +441,7 @@ public class CrawlController extends Configurable {
             webUrl.setURL(canonicalUrl);
             webUrl.setDocid(docId);
             webUrl.setDepth((short) 0);
+            webUrl.setLabel(label);
             if (robotstxtServer.allows(webUrl)) {
                 frontier.schedule(webUrl);
             } else {

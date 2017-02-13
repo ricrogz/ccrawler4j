@@ -18,6 +18,11 @@
 package edu.uci.ics.crawler4j.url;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import com.sleepycat.persist.model.Entity;
 import com.sleepycat.persist.model.PrimaryKey;
@@ -44,6 +49,9 @@ public class WebURL implements Serializable {
     private String anchor;
     private byte priority;
     private String tag;
+    private String label;
+
+    private Map<String, String> parameters = new LinkedHashMap<>();
 
     /**
      * @return unique document id assigned to this Url.
@@ -87,9 +95,27 @@ public class WebURL implements Serializable {
             }
         }
         path = url.substring(domainEndIdx);
+
+        // Check if url includes GET parameters
         int pathEndIdx = path.indexOf('?');
         if (pathEndIdx >= 0) {
+
+            String args = path.substring(pathEndIdx);
             path = path.substring(0, pathEndIdx);
+
+            int idx;
+            String[] pairs = args.split("&");
+            for (String pair : pairs) {
+                idx = pair.indexOf("=");
+                try {
+                    parameters.put(URLDecoder.decode(pair.substring(0, idx), "UTF-8"),
+                            URLDecoder.decode(pair.substring(idx + 1), "UTF-8"));
+                } catch (UnsupportedEncodingException e) {
+                    System.out.println("ERROR: Unable to decode GET parameter: " + pair);
+                }
+            }
+
+
         }
     }
 
@@ -191,6 +217,18 @@ public class WebURL implements Serializable {
     public void setTag(String tag) {
         this.tag = tag;
     }
+
+    /**
+     * @return label applied to the URL
+     * */
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
 
     @Override
     public int hashCode() {

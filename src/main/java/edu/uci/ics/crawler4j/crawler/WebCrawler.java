@@ -397,6 +397,8 @@ public class WebCrawler implements Runnable {
                         webURL.setDepth(curURL.getDepth());
                         webURL.setDocid(-1);
                         webURL.setAnchor(curURL.getAnchor());
+                        webURL.setLabel(curURL.getLabel());
+
                         if (shouldVisit(page, webURL)) {
                             if (!shouldFollowLinksIn(webURL) || robotstxtServer.allows(webURL)) {
                                 webURL.setDocid(docIdServer.getNewDocID(movedToUrl));
