@@ -17,15 +17,14 @@
 
 package edu.uci.ics.crawler4j.url;
 
+import com.sleepycat.persist.model.Entity;
+import com.sleepycat.persist.model.PrimaryKey;
+
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
-
-import com.sleepycat.persist.model.Entity;
-import com.sleepycat.persist.model.PrimaryKey;
 
 /**
  * @author Yasser Ganjisaffar
@@ -38,6 +37,7 @@ public class WebURL implements Serializable {
 
     @PrimaryKey
     private String url;
+    private int domainStartIdx;
 
     private int docid;
     private int parentDocid;
@@ -68,13 +68,20 @@ public class WebURL implements Serializable {
      * @return Url string
      */
     public String getURL() {
-        return url;
+        return getURL(true);
+    }
+
+    public String getURL(boolean includeProtocol) {
+        if (includeProtocol)
+            return url;
+        else
+            return url.substring(domainStartIdx);
     }
 
     public void setURL(String url) {
         this.url = url;
 
-        int domainStartIdx = url.indexOf("//") + 2;
+        domainStartIdx = url.indexOf("//") + 2;
         int domainEndIdx = url.indexOf('/', domainStartIdx);
         domainEndIdx = (domainEndIdx > domainStartIdx) ? domainEndIdx : url.length();
         domain = url.substring(domainStartIdx, domainEndIdx);
@@ -100,22 +107,31 @@ public class WebURL implements Serializable {
         int pathEndIdx = path.indexOf('?');
         if (pathEndIdx >= 0) {
 
-            String args = path.substring(pathEndIdx);
-            path = path.substring(0, pathEndIdx);
-
-            int idx;
-            String[] pairs = args.split("&");
-            for (String pair : pairs) {
-                idx = pair.indexOf("=");
-                try {
-                    parameters.put(URLDecoder.decode(pair.substring(0, idx), "UTF-8"),
-                            URLDecoder.decode(pair.substring(idx + 1), "UTF-8"));
-                } catch (UnsupportedEncodingException e) {
-                    System.out.println("ERROR: Unable to decode GET parameter: " + pair);
+            // If the path extends past '?', then we have parameters, and we parse them
+            if (path.length() > pathEndIdx) {
+                int idx;
+                String args = path.substring(pathEndIdx + 1); // Exclude "?" sign
+                String[] pairs = args.split("&");
+                String key, value;
+                for (String pair : pairs) {
+                    idx = pair.indexOf("=");
+                    try {
+                        if (idx < 0) {
+                            key = URLDecoder.decode(pair, "UTF-8");
+                            value = "";
+                        } else {
+                            key = URLDecoder.decode(pair.substring(0, idx), "UTF-8");
+                            value = URLDecoder.decode(pair.substring(idx + 1), "UTF-8");
+                        }
+                        parameters.put(key, value);
+                    } catch (UnsupportedEncodingException e) {
+                        System.out.println("ERROR: Unable to decode GET parameter: " + pair);
+                    }
                 }
             }
 
-
+            // Redefine path to exclude arguments
+            path = path.substring(0, pathEndIdx);
         }
     }
 
@@ -229,6 +245,16 @@ public class WebURL implements Serializable {
         this.label = label;
     }
 
+    /**
+     * @return Provide access to parameters mapping
+     * */
+    public boolean hasParameter(String name) {
+        return parameters.containsKey(name);
+    }
+
+    public String getParameter(String name) {
+        return parameters.get(name);
+    }
 
     @Override
     public int hashCode() {
@@ -245,7 +271,7 @@ public class WebURL implements Serializable {
         }
 
         WebURL otherUrl = (WebURL) o;
-        return (url != null) && url.equals(otherUrl.getURL());
+        return (url != null) && url.equals(otherUrl.getURL(false));
 
     }
 
