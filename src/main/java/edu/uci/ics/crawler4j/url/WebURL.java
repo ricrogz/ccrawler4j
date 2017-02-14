@@ -72,10 +72,11 @@ public class WebURL implements Serializable {
     }
 
     public String getURL(boolean includeProtocol) {
-        if (includeProtocol)
+        if (includeProtocol) {
             return url;
-        else
+        } else {
             return url.substring(domainStartIdx);
+        }
     }
 
     public void setURL(String url) {
@@ -112,7 +113,8 @@ public class WebURL implements Serializable {
                 int idx;
                 String args = path.substring(pathEndIdx + 1); // Exclude "?" sign
                 String[] pairs = args.split("&");
-                String key, value;
+                String key;
+                String value;
                 for (String pair : pairs) {
                     idx = pair.indexOf("=");
                     try {
