@@ -1,55 +1,16 @@
 # crawler4j
-[![Build Status](https://travis-ci.org/yasserg/crawler4j.svg?branch=master)](https://travis-ci.org/yasserg/crawler4j)
-![Maven Central](https://img.shields.io/maven-central/v/edu.uci.ics/crawler4j.svg?style=flat-square)
-[![Gitter Chat](http://img.shields.io/badge/chat-online-brightgreen.svg)](https://gitter.im/crawler4j/Lobby)
+[![Build Status](https://travis-ci.org/ricrogz/crawler4j.svg?branch=master)](https://travis-ci.org/ricrogz/crawler4j)
 
 crawler4j is an open source web crawler for Java which provides a simple interface for
 crawling the Web. Using it, you can setup a multi-threaded web crawler in few minutes.
 
-## Installation
+**crawler4j is developed by yasserg: [https://github.com/yasserg/crawler4j](https://github.com/yasserg/crawler4j). This is my own fork of the project**, which includes some upgrades to the WebURL class:
 
-### Using Maven
+1. Ability to define and inherit a "label" for the urls we visit, to be able to trace them back to an origin.
+2. Ability to compare WebURLs ignoring the protocol (the idea is that a url should be the same, ignoring if we get the content over HTTP or HTTPS).
+3. Ability to parse GET parameters in WebURL objects.
 
-To use the latest release of crawler4j, please use the following snippet in your pom.xml
-
-```xml
-    <dependency>
-        <groupId>edu.uci.ics</groupId>
-        <artifactId>crawler4j</artifactId>
-        <version>4.2</version>
-    </dependency>
-```
-
-#### Snapshot
-
-You can add the following to use the next SNAPSHOT release
-
-```xml
-    <repositories>
-        <repository>
-            <id>onebeartoe</id>
-            <name>onebeartoe</name>
-            <url>https://repository-onebeartoe.forge.cloudbees.com/snapshot/</url>
-        </repository>
-    </repositories>
-    
-    <dependencies>
-        <dependency>
-            <groupId>edu.uci.ics</groupId>
-            <artifactId>crawler4j</artifactId>
-            <version>4.3-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
-```
-
-### Without Maven
-
-crawler4j JARs are available on the [releases page](https://github.com/yasserg/crawler4j/releases)
-and at [Maven Central](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22edu.uci.ics%22%20AND%20a%3A%22crawler4j%22).
-
-If you use crawler4j without Maven, be aware that crawler4j jar file has a couple of
-external dependencies. In [releases page](https://github.com/yasserg/crawler4j/releases), you can find a file named crawler4j-X.Y-with-dependencies.jar that includes crawler4j and all of its dependencies as a bundle.
-You can add download it and add it to your classpath to get all the dependencies covered.
+As this is a personal project, I will not spend any time updating the documentation, so please, if you use this, and you find some of the information is contradictory or not working, please contact me or submit an issue. Most of the documentation of the original project should still be applicable, though.
 
 ## Quickstart
 You need to create a crawler class that extends WebCrawler. This class decides which URLs
@@ -249,8 +210,3 @@ However, you can overwrite it:
 crawlConfig.setUserAgentString(userAgentString);
 ```
 
-## License
-
-Copyright (c) 2010-2016 Yasser Ganjisaffar
-
-Published under [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0), see LICENSE
