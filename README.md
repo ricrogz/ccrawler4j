@@ -203,7 +203,7 @@ User-agent string is used for representing your crawler to web servers. See [her
 for more details. By default crawler4j uses the following user agent string:
 
 ```
-"crawler4j (https://github.com/yasserg/crawler4j/)"
+"crawler4j (https://github.com/ricrogz/crawler4j/)"
 ```
 However, you can overwrite it:
 ```java
