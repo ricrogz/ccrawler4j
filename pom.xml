@@ -260,6 +260,13 @@
 		<version>${apache.tika.version}</version>
 	</dependency>
 
+    <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+    <dependency>
+        <groupId>commons-io</groupId>
+        <artifactId>commons-io</artifactId>
+        <version>1.4</version>
+    </dependency>
+
     <!-- Test Dependencies -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -285,26 +292,6 @@
 			<version>${spock.version}</version>
 			<scope>test</scope>
 		</dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-all</artifactId>
-            <version>2.4.7</version>
-        </dependency>
-        <dependency>
-            <groupId>org.spockframework</groupId>
-            <artifactId>spock-core</artifactId>
-            <version>1.1-groovy-2.4-rc-3</version>
-        </dependency>
-        <dependency>
-            <groupId>com.github.tomakehurst</groupId>
-            <artifactId>wiremock</artifactId>
-            <version>2.5.0</version>
-        </dependency>
     </dependencies>
 
 	<repositories>
