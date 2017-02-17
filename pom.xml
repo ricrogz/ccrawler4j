@@ -223,13 +223,11 @@
         <artifactId>slf4j-api</artifactId>
         <version>${slf4j.version}</version>
     </dependency>
-    <dependency>
-        <!-- Implementation of slf4j -->
-        <groupId>ch.qos.logback</groupId>
-        <artifactId>logback-classic</artifactId>
-        <version>${logback.version}</version>
-        <scope>runtime</scope>
-    </dependency>
+	<dependency>
+		<groupId>org.slf4j</groupId>
+		<artifactId>slf4j-simple</artifactId>
+		<version>${slf4j.version}</version>
+	</dependency>
     <dependency>
         <!-- Google's core Java libraries -->
         <groupId>com.google.guava</groupId>
