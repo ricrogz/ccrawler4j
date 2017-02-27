@@ -19,10 +19,10 @@
 	<properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-		<slf4j.version>1.7.22</slf4j.version>
-		<guava.version>21.0-rc2</guava.version>
-		<apache.http.components.version>4.5.2</apache.http.components.version>
-		<je.version>5.0.73</je.version>
+		<slf4j.version>1.7.24</slf4j.version>
+		<guava.version>21.0</guava.version>
+		<apache.http.components.version>4.5.3</apache.http.components.version>
+		<je.version>5.0.84</je.version>
 		<apache.tika.version>1.14</apache.tika.version>
 		<commons-io.version>2.5</commons-io.version>
 		<!--test dependency versions -->
