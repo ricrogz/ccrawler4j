@@ -50,6 +50,7 @@ public class WebURL implements Serializable {
     private byte priority;
     private String tag;
     private String label;
+    private int redirectionDepth = 0;
 
     private Map<String, String> parameters = new LinkedHashMap<>();
 
@@ -245,6 +246,17 @@ public class WebURL implements Serializable {
 
     public void setLabel(String label) {
         this.label = label;
+    }
+
+    /**
+     * @return number of redirections followed up to this point
+     */
+    public int getRedirectionDepth() {
+        return redirectionDepth;
+    }
+
+    public void setRedirectionDepth(int depth) {
+        redirectionDepth = depth;
     }
 
     /**
