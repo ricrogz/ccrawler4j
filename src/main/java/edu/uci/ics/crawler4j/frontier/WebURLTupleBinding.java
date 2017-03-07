@@ -39,6 +39,7 @@ public class WebURLTupleBinding extends TupleBinding<WebURL> {
         webURL.setPriority(input.readByte());
         webURL.setAnchor(input.readString());
         webURL.setLabel(input.readString());
+        webURL.setRedirectionDepth(input.readInt());
         return webURL;
     }
 
@@ -52,5 +53,6 @@ public class WebURLTupleBinding extends TupleBinding<WebURL> {
         output.writeByte(url.getPriority());
         output.writeString(url.getAnchor());
         output.writeString(url.getLabel());
+        output.writeInt(url.getRedirectionDepth());
     }
 }
