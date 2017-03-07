@@ -399,10 +399,8 @@ public class WebCrawler implements Runnable {
                         webURL.setAnchor(curURL.getAnchor());
                         webURL.setLabel(curURL.getLabel());
 
-                        // In case current url is a redirection, update the depth on WebURL
-                        if (page.isRedirect()) {
-                            webURL.setRedirectionDepth(curURL.getRedirectionDepth() + 1);
-                        }
+                        // Update the number of consecutive redirections followed to reach webURL.
+                        webURL.setRedirectionDepth(curURL.getRedirectionDepth() + 1);
 
                         if (shouldVisit(page, webURL)) {
                             if (!shouldFollowLinksIn(webURL) || robotstxtServer.allows(webURL)) {

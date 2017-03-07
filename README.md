@@ -9,6 +9,7 @@ crawling the Web. Using it, you can setup a multi-threaded web crawler in few mi
 1. Ability to define and inherit a "label" for the urls we visit, to be able to trace them back to an origin.
 2. Ability to compare WebURLs ignoring the protocol (the idea is that a url should be the same, ignoring if we get the content over HTTP or HTTPS).
 3. Ability to parse GET parameters in WebURL objects.
+4. Added a counter for the number of consecutive redirections traversed to reach a url.
 
 As this is a personal project, I will not spend any time updating the documentation, so please, if you use this, and you find some of the information is contradictory or not working, please contact me or submit an issue. Most of the documentation of the original project should still be applicable, though.
 
