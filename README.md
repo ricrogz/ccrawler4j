@@ -1,10 +1,10 @@
-# crawler4j
-[![Build Status](https://travis-ci.org/ricrogz/crawler4j.svg?branch=master)](https://travis-ci.org/ricrogz/crawler4j)
+# custom crawler4j (ccrawler4j)
+[![Build Status](https://travis-ci.org/ricrogz/ccrawler4j.svg?branch=master)](https://travis-ci.org/ricrogz/ccrawler4j)
 
-crawler4j is an open source web crawler for Java which provides a simple interface for
+ccrawler4j is an open source web crawler for Java which provides a simple interface for
 crawling the Web. Using it, you can setup a multi-threaded web crawler in few minutes.
 
-**crawler4j is developed by yasserg: [https://github.com/yasserg/crawler4j](https://github.com/yasserg/crawler4j). This is my own fork of the project**, which includes some upgrades to the WebURL class:
+**It is derived from crawler4j is developed by yasserg: [https://github.com/yasserg/crawler4j](https://github.com/yasserg/crawler4j). This is my own fork of the project**, which includes some upgrades to the WebURL class:
 
 1. Ability to define and inherit a "label" for the urls we visit, to be able to trace them back to an origin.
 2. Ability to compare WebURLs ignoring the protocol (the idea is that a url should be the same, ignoring if we get the content over HTTP or HTTPS).
